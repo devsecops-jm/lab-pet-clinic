@@ -90,12 +90,12 @@ jobs:
           DSO_TK_SONARCLOUD: ${{ secrets.DSO_TK_SONAR}}
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
-          echo "Realizando análisis inicial en la rama main..."
+          echo "Realizando análisis inicial en la rama feature-jm..."
           ./gradlew sonarqube \
             -Dsonar.projectKey=$REPO_NAME \
             -Dsonar.organization=devsecops-jm \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.token=$DSO_TK_SONAR\
+            -Dsonar.token=$DSO_TK_SONARCLOUD\
             -Dsonar.branch.name=feature-jm
 
       - name: Perform Branch Analysis
@@ -111,7 +111,7 @@ jobs:
             -Dsonar.projectKey=$REPO_NAME \
             -Dsonar.organization=devsecops-jm \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.token=$DSO_TK_SONAR\
+            -Dsonar.token=$DSO_TK_SONARCLOUD\
             -Dsonar.branch.name=$BRANCH_NAME
 
       - name: Validate Quality Gate
