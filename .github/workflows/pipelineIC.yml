@@ -3,9 +3,9 @@ name: DevSecOps-jm Sonar Cloud
 on:
   push:
     branches:
-      - feature-jm
+      - main
       #- '**'
-#TEST
+#TEST 
 jobs:
   SAST:
     runs-on: ubuntu-24.04
@@ -67,10 +67,10 @@ jobs:
               echo "Proyecto creado exitosamente (HTTP $create_response)."
             fi
 
-            echo "Estableciendo la rama [feature-jm] [main] como predeterminada..."
+            echo "Estableciendo la rama [main] como predeterminada..."
             curl -s -f -X POST -u "$DSO_TK_SONARCLOUD:" \
               "https://sonarcloud.io/api/project_branches/rename" \
-              -d "name=feature-jm" \
+              -d "name=main" \
               -d "project=$REPO_NAME"
 
             echo "project_created=true" >> $GITHUB_ENV
@@ -95,8 +95,8 @@ jobs:
             -Dsonar.projectKey=$REPO_NAME \
             -Dsonar.organization=devsecops-jm \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.token=$DSO_TK_SONAR\
-            -Dsonar.branch.name=feature-jm
+            -Dsonar.token=$DSO_TK_SONARCLOUD\
+            -Dsonar.branch.name=main
 
       - name: Perform Branch Analysis
         if: env.project_created == 'false'
@@ -111,7 +111,7 @@ jobs:
             -Dsonar.projectKey=$REPO_NAME \
             -Dsonar.organization=devsecops-jm \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.token=$DSO_TK_SONAR\
+            -Dsonar.token=$DSO_TK_SONARCLOUD\
             -Dsonar.branch.name=$BRANCH_NAME
 
       - name: Validate Quality Gate
