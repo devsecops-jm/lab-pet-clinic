@@ -250,3 +250,12 @@ jobs:
       # with:
       #   image-ref: 'b4b4y4g4x/cursodevsecops-test:latest'
       #   format: 'table'
+
+  Deploy:
+    needs: DockerScan
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Ejecución de Proceso de despliegue de código
+        run: |
+          echo "En construcción - Docker Scan"
+    
